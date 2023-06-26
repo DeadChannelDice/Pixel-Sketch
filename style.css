@@ -25,3 +25,46 @@
   #root, #__next {
     isolation: isolate;
   }
+
+  /* Reset end */
+
+body {
+    background-color: lightgray;
+}
+
+  h1 {
+    text-align: center;
+  }
+
+  main {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border: 1px solid red;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  .toolbox {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid red;
+  }
+
+  .drawing-area {
+    display: grid;
+    width: 800px;
+    grid-template-columns: repeat(5, 1fr);
+    margin: 1rem;
+    height: 800px;
+    border: 1px solid red;
+    
+  }
+
+  .pixel {
+    background-color: cadetblue;
+    height: 30px;
+    width: 30px;
+    border: 1px solid red;
+    /* margin: 1rem; */
+  }
