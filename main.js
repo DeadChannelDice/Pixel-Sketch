@@ -1,15 +1,30 @@
 const penColor = document.querySelector("#pen-color")
-const eraserBtn = document.querySelector("#btn-eraser")
-const rainbowMode = document.querySelector("#btn-rainbow")
-const normalMode = document.querySelector("#btn-normal")
-const clearArea = document.querySelector("#btn-clear")
-const shadowMode = document.querySelector("#btn-shadow")
-const highlightMode = document.querySelector("#btn-highlight")
+const btnEraser = document.querySelector("#btn-eraser")
+const btnRainbowMode = document.querySelector("#btn-rainbow")
+const btnNormalMode = document.querySelector("#btn-normal")
+const btnClearArea = document.querySelector("#btn-clear")
+const btnShadowMode = document.querySelector("#btn-shadow")
+const btnHighlightMode = document.querySelector("#btn-highlight")
 const gridSize = document.querySelector("#slider")
 const drawingArea = document.querySelector(".drawing-area")
 const numOfRows = document.querySelector(".num-of-rows")
 
 numOfRows.textContent = `${gridSize.value} x ${gridSize.value}`
+
+const clearArea = () => {
+    const pixels = document.querySelectorAll(".pixel")
+    pixels.forEach((pixel) => {
+        pixel.style.backgroundColor = 'white'
+    })
+}
+
+btnClearArea.addEventListener("click", e => {
+    clearArea()
+})
+
+// eraserBtn.addEventListener("click", e => {
+
+// })
 
 const genGrid = (numofColumns) => {
 
@@ -52,6 +67,6 @@ gridSize.addEventListener("change", e => {
 })
 
 
-// Make pixels change colors when clicking and dragging
+// Hook up the buttons
 
 
