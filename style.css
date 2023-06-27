@@ -53,18 +53,17 @@ body {
 
   .drawing-area {
     display: grid;
-    width: 800px;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: auto auto auto auto;
+    width: 400px;
+    height: 400px;
     margin: 1rem;
-    height: 800px;
     border: 1px solid red;
     
   }
 
   .pixel {
     background-color: cadetblue;
-    height: 30px;
-    width: 30px;
-    border: 1px solid red;
-    /* margin: 1rem; */
+    height: auto;
+    width: auto;
+    /* border: 1px solid red; */
   }

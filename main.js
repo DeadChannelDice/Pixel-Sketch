@@ -15,7 +15,6 @@ const genGrid = (numofColumns) => {
 
     drawingArea.innerHTML = ""
 
-
     drawingArea.style.gridTemplateColumns = `repeat(${numofColumns}, 1fr)`
 
     let pixelCount = (numofColumns * numofColumns)
@@ -25,6 +24,13 @@ const genGrid = (numofColumns) => {
         pixel.classList.add("pixel")
         drawingArea.appendChild(pixel)
     }
+
+    const pixels = document.querySelectorAll(".pixel")
+    pixels.forEach((pixel) => {
+        pixel.addEventListener("mousedown", e => {
+            e.target.style.backgroundColor = penColor.value
+        })
+    })
 
 }
 
