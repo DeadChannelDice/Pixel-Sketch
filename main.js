@@ -1,4 +1,4 @@
-const penColor = document.querySelector("pen-color")
+const penColor = document.querySelector("#pen-color")
 const eraserBtn = document.querySelector("#btn-eraser")
 const rainbowMode = document.querySelector("#btn-rainbow")
 const normalMode = document.querySelector("#btn-normal")
@@ -22,13 +22,15 @@ const genGrid = (numofColumns) => {
     for(let i = 0; i < pixelCount; i++){
         const pixel = document.createElement("div")
         pixel.classList.add("pixel")
+        pixel.setAttribute("draggable", "false")
         drawingArea.appendChild(pixel)
     }
 
     const pixels = document.querySelectorAll(".pixel")
     pixels.forEach((pixel) => {
-        pixel.addEventListener("mousedown", e => {
-            e.target.style.backgroundColor = penColor.value
+        pixel.addEventListener("mouseover", e => {
+            e.target.style.backgroundColor = `${penColor.value}`
+            console.log("pixel pressed")
         })
     })
 
@@ -37,6 +39,8 @@ const genGrid = (numofColumns) => {
 
 
 genGrid(gridSize.value)
+
+
 
 
 
