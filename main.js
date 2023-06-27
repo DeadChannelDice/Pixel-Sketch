@@ -9,22 +9,62 @@ const gridSize = document.querySelector("#slider")
 const drawingArea = document.querySelector(".drawing-area")
 const numOfRows = document.querySelector(".num-of-rows")
 
-numOfRows.textContent = `${gridSize.value} x ${gridSize.value}`
+// --Toolbox Area-- //
+// Color Changing //
 
+let pixelColor = penColor.value
+
+// Normal Mode //
+penColor.addEventListener("change", (e) => {
+    pixelColor = penColor.value
+})
+
+// Eraser Button //
+btnEraser.addEventListener("click", () => {
+    pixelColor = "white"
+})
+
+// Normal Mode Button //
+btnNormalMode.addEventListener("click", () => {
+    pixelColor = penColor.value
+})
+
+// Highlight Mode Button //
+
+// Shadow Mode Button //
+
+// Rainbow Mode Button //
+
+
+// Clear Area Button //
 const clearArea = () => {
     const pixels = document.querySelectorAll(".pixel")
     pixels.forEach((pixel) => {
         pixel.style.backgroundColor = 'white'
     })
 }
-
 btnClearArea.addEventListener("click", e => {
     clearArea()
 })
 
-// eraserBtn.addEventListener("click", e => {
+// Grid Size Slider // 
+gridSize.addEventListener("change", e => {
+    genGrid(e.target.value)
+    numOfRows.textContent = `${gridSize.value} x ${gridSize.value}`
+    console.log(e.target.value)
+})
 
-// })
+// Grid Size Display //
+numOfRows.textContent = `${gridSize.value} x ${gridSize.value}`
+
+// --Drawing Area-- //
+
+
+
+
+
+
+// Grid Generation // 
 
 const genGrid = (numofColumns) => {
 
@@ -37,14 +77,14 @@ const genGrid = (numofColumns) => {
     for(let i = 0; i < pixelCount; i++){
         const pixel = document.createElement("div")
         pixel.classList.add("pixel")
-        pixel.setAttribute("draggable", "false")
+        // pixel.setAttribute("draggable", "false")
         drawingArea.appendChild(pixel)
     }
 
     const pixels = document.querySelectorAll(".pixel")
     pixels.forEach((pixel) => {
         pixel.addEventListener("mouseover", e => {
-            e.target.style.backgroundColor = `${penColor.value}`
+            e.target.style.backgroundColor = `${pixelColor}`
             console.log("pixel pressed")
         })
     })
@@ -59,12 +99,7 @@ genGrid(gridSize.value)
 
 
 
-// Link slider to grid resolution 
-gridSize.addEventListener("change", e => {
-    genGrid(e.target.value)
-    numOfRows.textContent = `${gridSize.value} x ${gridSize.value}`
-    console.log(e.target.value)
-})
+
 
 
 // Hook up the buttons
