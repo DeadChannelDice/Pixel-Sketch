@@ -62,8 +62,8 @@ body {
   }
 
   .pixel {
-    background-color: cadetblue;
+    background-color: white;
     height: auto;
     width: auto;
-    /* border: 1px solid red; */
+    border: 1px solid red;
   }
