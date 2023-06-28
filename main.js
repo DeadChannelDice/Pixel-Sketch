@@ -9,32 +9,60 @@ const gridSize = document.querySelector("#slider")
 const drawingArea = document.querySelector(".drawing-area")
 const numOfRows = document.querySelector(".num-of-rows")
 
-// --Toolbox Area-- //
-// Color Changing //
 
-let pixelColor = penColor.value
 
-// Normal Mode //
-penColor.addEventListener("change", (e) => {
-    pixelColor = penColor.value
+let currentColor = penColor.value
+let currentMode = 'normal'
+let currentGrid = gridSize.value
+
+
+const setNewMode = (newMode) => {
+    currentMode = newMode
+}
+
+const drawColor = (currentMode) => {
+    if (currentMode === "normal"){
+    return `${currentColor}`
+    } else if (currentMode === "eraser"){
+        return "white"
+    } else if (currentMode === "rainbow") {
+        let red = Math.floor(Math.random()*256)
+        let green = Math.floor(Math.random()*256)
+        let blue = Math.floor(Math.random()*256)
+        // let opacity = .5
+        return `rgb(${red}, ${green}, ${blue})`
+    }
+}
+
+// Color Change //
+penColor.addEventListener("change", () => {
+    currentColor = penColor.value
 })
 
 // Eraser Button //
 btnEraser.addEventListener("click", () => {
-    pixelColor = "white"
+    currentMode = "eraser"
+    // btnEraser.classList.toggle("active")
 })
 
 // Normal Mode Button //
 btnNormalMode.addEventListener("click", () => {
-    pixelColor = penColor.value
+    currentMode = "normal"
 })
 
 // Highlight Mode Button //
-
+btnHighlightMode.addEventListener("click", () => {
+    currentMode = "highlight"
+})
 // Shadow Mode Button //
+btnShadowMode.addEventListener("shadow", () => {
+    currentMode = "shadow"
+})
 
 // Rainbow Mode Button //
-
+btnRainbowMode.addEventListener("click", () => {
+    currentMode = "rainbow"
+})
 
 // Clear Area Button //
 const clearArea = () => {
@@ -43,37 +71,16 @@ const clearArea = () => {
         pixel.style.backgroundColor = 'white'
     })
 }
-btnClearArea.addEventListener("click", e => {
+btnClearArea.addEventListener("click", () => {
     clearArea()
 })
 
-// Grid Size Slider // 
-gridSize.addEventListener("change", e => {
-    genGrid(e.target.value)
-    numOfRows.textContent = `${gridSize.value} x ${gridSize.value}`
-    console.log(e.target.value)
-})
-
-// Grid Size Display //
-numOfRows.textContent = `${gridSize.value} x ${gridSize.value}`
-
-// --Drawing Area-- //
-
-
-
-
-
-
-// Grid Generation // 
 
 const genGrid = (numofColumns) => {
-
     drawingArea.innerHTML = ""
-
     drawingArea.style.gridTemplateColumns = `repeat(${numofColumns}, 1fr)`
-
     let pixelCount = (numofColumns * numofColumns)
-
+    
     for(let i = 0; i < pixelCount; i++){
         const pixel = document.createElement("div")
         pixel.classList.add("pixel")
@@ -84,12 +91,22 @@ const genGrid = (numofColumns) => {
     const pixels = document.querySelectorAll(".pixel")
     pixels.forEach((pixel) => {
         pixel.addEventListener("mouseover", e => {
-            e.target.style.backgroundColor = `${pixelColor}`
+            e.target.style.backgroundColor = drawColor(currentMode)
             console.log("pixel pressed")
         })
     })
 
 }
+
+// Grid Size Slider // 
+gridSize.addEventListener("change", (e) => {
+    genGrid(e.target.value)
+    numOfRows.textContent = `${gridSize.value} x ${gridSize.value}`
+    console.log(e.target.value)
+})
+
+// Grid Size Display //
+numOfRows.textContent = `${gridSize.value} x ${gridSize.value}`
 
 
 
@@ -97,11 +114,5 @@ genGrid(gridSize.value)
 
 
 
-
-
-
-
-
-// Hook up the buttons
 
 
