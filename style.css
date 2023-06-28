@@ -57,7 +57,7 @@ body {
     width: 400px;
     height: 400px;
     margin: 1rem;
-    border: 1px solid red;
+    /* border: 10px solid rgb(93, 236, 10, 1); */
     
   }
 
@@ -65,5 +65,5 @@ body {
     background-color: white;
     height: auto;
     width: auto;
-    border: 1px solid red;
+    /* border: 1px solid red; */
   }
