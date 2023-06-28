@@ -29,13 +29,13 @@ const drawColor = (currentMode) => {
         let red = Math.floor(Math.random()*256)
         let green = Math.floor(Math.random()*256)
         let blue = Math.floor(Math.random()*256)
-        // let opacity = .5
-        return `rgb(${red}, ${green}, ${blue})`
+        let opacity = .5
+        return `rgb(${red}, ${green}, ${blue}, ${opacity})`
     }
 }
 
 // Color Change //
-penColor.addEventListener("change", () => {
+penColor.addEventListener("change", (e) => {
     currentColor = penColor.value
 })
 
@@ -92,7 +92,7 @@ const genGrid = (numofColumns) => {
     pixels.forEach((pixel) => {
         pixel.addEventListener("mouseover", e => {
             e.target.style.backgroundColor = drawColor(currentMode)
-            console.log("pixel pressed")
+            console.log(e.target.style.cssText)
         })
     })
 
@@ -102,7 +102,6 @@ const genGrid = (numofColumns) => {
 gridSize.addEventListener("change", (e) => {
     genGrid(e.target.value)
     numOfRows.textContent = `${gridSize.value} x ${gridSize.value}`
-    console.log(e.target.value)
 })
 
 // Grid Size Display //
