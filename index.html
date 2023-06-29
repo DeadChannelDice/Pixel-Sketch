@@ -12,16 +12,21 @@
     <main>
         <div class="toolbox">
             <input type="color" name="pen-color" id="pen-color">
-            <span class="label" id="pen-color">Pen Color</span>
 
-            <button class="btn-tool" id="btn-eraser">Eraser</button>
-            <button class="btn-tool" id="btn-normal">Normal Mode</button>
-            <button class="btn-tool" id="btn-highlight">Highlight Mode</button>
-            <button class="btn-tool" id="btn-shadow">Shadow Mode</button>
-            <button class="btn-tool" id="btn-rainbow">Rainbow Mode</button>
-            <button class="btn-tool" id="btn-clear">Clear Artboard</button>
-            <input type="range" min="4" max="10" value="4" name="slider" id="slider" class="slider">
-            <span id="drawingAreaSize">Grid size</span><span class="num-of-rows"></span>
+            <button class="btn-tool" id="btn-eraser"></button>
+            <button class="btn-tool" id="btn-normal"></button>
+            <button class="btn-tool" id="btn-highlight"></button>
+            <button class="btn-tool" id="btn-shadow"></button>
+            <button class="btn-tool" id="btn-rainbow"></button>
+            <button class="btn-tool" id="btn-clear"></button>
+            <div class="slider-tool">
+                <div class="slider-info">
+                    <img src="./icons/iconmonstr-layout-grid-lined.svg" alt="" id="grid-icon">
+                    <span class="num-of-rows"></span>
+                </div>
+                <input type="range" min="4" max="10" value="4" name="slider" id="slider" class="slider">
+                
+            </div>
         </div>
 
         <div class="drawing-area">

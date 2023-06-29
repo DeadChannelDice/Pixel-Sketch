@@ -49,6 +49,7 @@ body {
   .toolbox {
     display: flex;
     flex-direction: column;
+    width: 3rem;
     border: 1px solid red;
   }
 
@@ -68,3 +69,92 @@ body {
     width: auto;
     /* border: 1px solid red; */
   }
+
+  #pen-color {
+    -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: white;
+  border: none;
+  cursor:crosshair;
+
+}
+#pen-color::-webkit-color-swatch {
+  border-radius: 10%;
+  border: none;
+}
+#pen-color::-moz-color-swatch {
+  border-radius: 10%;
+  border: none;
+    
+}
+
+
+.btn-tool {
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+
+
+  #btn-eraser {
+    background-image: url(./icons/iconmonstr-eraser-2.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  #btn-normal {
+    background-image: url(./icons/iconmonstr-paintbrush-12.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  #btn-highlight {
+    background-image: url(./icons/iconmonstr-brightness-4.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  #btn-shadow {
+    background-image: url(./icons/iconmonstr-brightness-2.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  #btn-rainbow {
+    background-image: url(./icons/iconmonstr-weather-127.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  #btn-clear {
+    background-image: url(./icons/iconmonstr-text-24.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+#grid-icon {
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.slider-tool {
+    display: flex;
+    align-items: center;
+    border: 2px solid black;
+}
+
+.slider-info {
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+#slider {
+    appearance: none;
+    -webkit-appearance: slider-vertical;
+    border: 1px solid red;
+}
