@@ -37,7 +37,7 @@ btnHighlightMode.addEventListener("click", () => {
     currentMode = "highlight"
 })
 // Shadow Mode Button //
-btnShadowMode.addEventListener("shadow", () => {
+btnShadowMode.addEventListener("click", () => {
     currentMode = "shadow"
 })
 
@@ -67,7 +67,7 @@ const genGrid = (numofColumns) => {
     for(let i = 0; i < pixelCount; i++){
         const pixel = document.createElement("div")
         pixel.classList.add("pixel")
-        pixel.style.backgroundColor = 'rgb(255, 255, 255, .9)'
+        pixel.style.backgroundColor = 'rgb(255, 255, 255, 1)'
         drawingArea.insertAdjacentElement("beforeend", pixel)
     }
 
@@ -82,10 +82,65 @@ const genGrid = (numofColumns) => {
 }
 
 const drawColor = (currentMode, e) => {
-    console.log(e.target.style.backgroundColor)
-    e.target.style.backgroundColor = 'blue';
 
+    let currentPixelColor = e.target.style.backgroundColor
+
+    const pixelValueReset = () => {
+        let red = 0
+        let green = 0
+        let blue = 0
+    }
+   
+
+switch (currentMode) {
+    case "normal":
+        // console.log(e.target.style.backgroundColor)
+        return e.target.style.backgroundColor = `${currentColor}`
+    break
+
+    case "rainbow":
+        red = Math.floor(Math.random()*256)
+        green = Math.floor(Math.random()*256)
+        blue = Math.floor(Math.random()*256)
+        let opacity = .5
+        let rainbowPixel = `rgb(${red}, ${green}, ${blue}, ${opacity})`
+        return e.target.style.backgroundColor = rainbowPixel
+    break
+
+    case "eraser":
+        return e.target.style.backgroundColor = `rgba(255, 255, 255, 1)`
+    break
+
+    case "highlight": 
+        currentPixelColor = currentPixelColor.replace(/[^\d,]/g, '').split(',')
+        pixelValueReset()
+        red = parseInt(currentPixelColor[0])
+        green = parseInt(currentPixelColor[1])
+        blue = parseInt(currentPixelColor[2])
+        let highlightPixel = `rgb(${red + 25}, ${green + 25}, ${blue + 25})`
+        return e.target.style.backgroundColor = highlightPixel
+    break
+
+    case "shadow":
+        currentPixelColor = currentPixelColor.replace(/[^\d,]/g, '').split(',')
+        pixelValueReset()
+        red = parseInt(currentPixelColor[0])
+        green = parseInt(currentPixelColor[1])
+        blue = parseInt(currentPixelColor[2])
+        let shadowPixel = `rgb(${red - 25}, ${green - 25}, ${blue - 25})`
+        return e.target.style.backgroundColor = shadowPixel
+    break
 }
+
+
+
+
+    
+    }
+    
+
+    // if (currentMode === "normal")
+    // return e.target.style.backgroundColor = 'blue';
 
 // const drawColor = (currentMode, e) => {
 //     if (currentMode === "normal"){
