@@ -8,31 +8,14 @@ const btnHighlightMode = document.querySelector("#btn-highlight")
 const gridSize = document.querySelector("#slider")
 const drawingArea = document.querySelector(".drawing-area")
 const numOfRows = document.querySelector(".num-of-rows")
+const body = document.querySelector("body")
 
 
 
 let currentColor = penColor.value
-let currentMode = 'normal'
+let currentMode = "normal"
 let currentGrid = gridSize.value
 
-
-const setNewMode = (newMode) => {
-    currentMode = newMode
-}
-
-const drawColor = (currentMode) => {
-    if (currentMode === "normal"){
-    return `${currentColor}`
-    } else if (currentMode === "eraser"){
-        return "white"
-    } else if (currentMode === "rainbow") {
-        let red = Math.floor(Math.random()*256)
-        let green = Math.floor(Math.random()*256)
-        let blue = Math.floor(Math.random()*256)
-        let opacity = .5
-        return `rgb(${red}, ${green}, ${blue}, ${opacity})`
-    }
-}
 
 // Color Change //
 penColor.addEventListener("change", (e) => {
@@ -55,7 +38,7 @@ btnHighlightMode.addEventListener("click", () => {
     currentMode = "highlight"
 })
 // Shadow Mode Button //
-btnShadowMode.addEventListener("shadow", () => {
+btnShadowMode.addEventListener("click", () => {
     currentMode = "shadow"
 })
 
@@ -68,11 +51,15 @@ btnRainbowMode.addEventListener("click", () => {
 const clearArea = () => {
     const pixels = document.querySelectorAll(".pixel")
     pixels.forEach((pixel) => {
-        pixel.style.backgroundColor = 'white'
+        pixel.style.backgroundColor = 'rgb(255, 255, 255)'
     })
 }
 btnClearArea.addEventListener("click", () => {
     clearArea()
+})
+
+body.addEventListener("mouseup", () => {
+    doneDrawing()
 })
 
 
@@ -84,19 +71,97 @@ const genGrid = (numofColumns) => {
     for(let i = 0; i < pixelCount; i++){
         const pixel = document.createElement("div")
         pixel.classList.add("pixel")
-        // pixel.setAttribute("draggable", "false")
-        drawingArea.appendChild(pixel)
+        pixel.setAttribute("draggable", "false")
+        pixel.style.backgroundColor = 'rgb(255, 255, 255)'
+        drawingArea.insertAdjacentElement("beforeend", pixel)
     }
 
-    const pixels = document.querySelectorAll(".pixel")
-    pixels.forEach((pixel) => {
-        pixel.addEventListener("mouseover", e => {
-            e.target.style.backgroundColor = drawColor(currentMode)
-            console.log(e.target.style.cssText)
+    const pixels = drawingArea.querySelectorAll(".pixel")
+    pixels.forEach(pixel => {
+        pixel.addEventListener("mousedown", (e) => {
+            startDrawing()
+            drawColor(currentMode, e)
         })
+        pixel.addEventListener("mouseover", (e) => {
+            drawColor(currentMode, e)
+        })
+        pixel.addEventListener("mouseup", () => {
+            doneDrawing()
+        })
+        
     })
 
 }
+
+let drawActive = false
+
+const startDrawing = () => {
+    return drawActive = true
+}
+
+const doneDrawing = () => {
+    return drawActive = false
+}
+
+
+const drawColor = (currentMode, e) => {
+
+    if(e.type == "mouseover" && !drawActive) {
+        return
+    }
+
+    console.log(e)
+
+    let currentPixelColor = e.target.style.backgroundColor
+
+    const pixelValueReset = () => {
+        let red = 0
+        let green = 0
+        let blue = 0
+    }
+   
+
+switch (currentMode) {
+    case "normal":
+        // console.log(e.target.style.backgroundColor)
+        return e.target.style.backgroundColor = `${currentColor}`
+    break
+
+    case "rainbow":
+        red = Math.floor(Math.random()*256)
+        green = Math.floor(Math.random()*256)
+        blue = Math.floor(Math.random()*256)
+        let opacity = .5
+        let rainbowPixel = `rgb(${red}, ${green}, ${blue}, ${opacity})`
+        return e.target.style.backgroundColor = rainbowPixel
+    break
+
+    case "eraser":
+        return e.target.style.backgroundColor = `rgba(255, 255, 255, 1)`
+    break
+
+    case "highlight": 
+        currentPixelColor = currentPixelColor.replace(/[^\d,]/g, '').split(',')
+        pixelValueReset()
+        red = parseInt(currentPixelColor[0])
+        green = parseInt(currentPixelColor[1])
+        blue = parseInt(currentPixelColor[2])
+        let highlightPixel = `rgb(${red + 25}, ${green + 25}, ${blue + 25})`
+        return e.target.style.backgroundColor = highlightPixel
+    break
+
+    case "shadow":
+        currentPixelColor = currentPixelColor.replace(/[^\d,]/g, '').split(',')
+        pixelValueReset()
+        red = parseInt(currentPixelColor[0])
+        green = parseInt(currentPixelColor[1])
+        blue = parseInt(currentPixelColor[2])
+        let shadowPixel = `rgb(${red - 25}, ${green - 25}, ${blue - 25})`
+        return e.target.style.backgroundColor = shadowPixel
+    break
+}
+    }
+    
 
 // Grid Size Slider // 
 gridSize.addEventListener("change", (e) => {
