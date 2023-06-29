@@ -8,6 +8,7 @@ const btnHighlightMode = document.querySelector("#btn-highlight")
 const gridSize = document.querySelector("#slider")
 const drawingArea = document.querySelector(".drawing-area")
 const numOfRows = document.querySelector(".num-of-rows")
+const body = document.querySelector("body")
 
 
 
@@ -50,12 +51,15 @@ btnRainbowMode.addEventListener("click", () => {
 const clearArea = () => {
     const pixels = document.querySelectorAll(".pixel")
     pixels.forEach((pixel) => {
-        console.log(pixel)
-        pixel.style.backgroundColor = 'white'
+        pixel.style.backgroundColor = 'rgb(255, 255, 255)'
     })
 }
 btnClearArea.addEventListener("click", () => {
     clearArea()
+})
+
+body.addEventListener("mouseup", () => {
+    doneDrawing()
 })
 
 
@@ -67,21 +71,46 @@ const genGrid = (numofColumns) => {
     for(let i = 0; i < pixelCount; i++){
         const pixel = document.createElement("div")
         pixel.classList.add("pixel")
-        pixel.style.backgroundColor = 'rgb(255, 255, 255, 1)'
+        pixel.setAttribute("draggable", "false")
+        pixel.style.backgroundColor = 'rgb(255, 255, 255)'
         drawingArea.insertAdjacentElement("beforeend", pixel)
     }
 
     const pixels = drawingArea.querySelectorAll(".pixel")
     pixels.forEach(pixel => {
+        pixel.addEventListener("mousedown", (e) => {
+            startDrawing()
+            drawColor(currentMode, e)
+        })
         pixel.addEventListener("mouseover", (e) => {
             drawColor(currentMode, e)
+        })
+        pixel.addEventListener("mouseup", () => {
+            doneDrawing()
         })
         
     })
 
 }
 
+let drawActive = false
+
+const startDrawing = () => {
+    return drawActive = true
+}
+
+const doneDrawing = () => {
+    return drawActive = false
+}
+
+
 const drawColor = (currentMode, e) => {
+
+    if(e.type == "mouseover" && !drawActive) {
+        return
+    }
+
+    console.log(e)
 
     let currentPixelColor = e.target.style.backgroundColor
 
@@ -131,40 +160,8 @@ switch (currentMode) {
         return e.target.style.backgroundColor = shadowPixel
     break
 }
-
-
-
-
-    
     }
     
-
-    // if (currentMode === "normal")
-    // return e.target.style.backgroundColor = 'blue';
-
-// const drawColor = (currentMode, e) => {
-//     if (currentMode === "normal"){
-//         console.log(e.target.style.cssText)
-//     return `background-color: ${currentColor}`
-//     } else if (currentMode === "eraser"){
-//         return `background-color: rgb(255, 255, 255, .9)`
-//     } else if (currentMode === "rainbow") {
-//         let red = Math.floor(Math.random()*256)
-//         let green = Math.floor(Math.random()*256)
-//         let blue = Math.floor(Math.random()*256)
-//         let opacity = .5
-//         return `background-color: rgb(${red}, ${green}, ${blue}, ${opacity})`
-//     } else if (currentMode === "highlight"){
-//         console.log(e.target.dataset.color)
-//     }
-// }
-
-
-
-
-
-
-
 
 // Grid Size Slider // 
 gridSize.addEventListener("change", (e) => {
