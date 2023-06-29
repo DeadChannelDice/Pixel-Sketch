@@ -12,27 +12,9 @@ const numOfRows = document.querySelector(".num-of-rows")
 
 
 let currentColor = penColor.value
-let currentMode = 'normal'
+let currentMode = "normal"
 let currentGrid = gridSize.value
 
-
-const setNewMode = (newMode) => {
-    currentMode = newMode
-}
-
-const drawColor = (currentMode) => {
-    if (currentMode === "normal"){
-    return `${currentColor}`
-    } else if (currentMode === "eraser"){
-        return "white"
-    } else if (currentMode === "rainbow") {
-        let red = Math.floor(Math.random()*256)
-        let green = Math.floor(Math.random()*256)
-        let blue = Math.floor(Math.random()*256)
-        let opacity = .5
-        return `rgb(${red}, ${green}, ${blue}, ${opacity})`
-    }
-}
 
 // Color Change //
 penColor.addEventListener("change", (e) => {
@@ -68,6 +50,7 @@ btnRainbowMode.addEventListener("click", () => {
 const clearArea = () => {
     const pixels = document.querySelectorAll(".pixel")
     pixels.forEach((pixel) => {
+        console.log(pixel)
         pixel.style.backgroundColor = 'white'
     })
 }
@@ -84,19 +67,49 @@ const genGrid = (numofColumns) => {
     for(let i = 0; i < pixelCount; i++){
         const pixel = document.createElement("div")
         pixel.classList.add("pixel")
-        // pixel.setAttribute("draggable", "false")
-        drawingArea.appendChild(pixel)
+        pixel.style.backgroundColor = 'rgb(255, 255, 255, .9)'
+        drawingArea.insertAdjacentElement("beforeend", pixel)
     }
 
-    const pixels = document.querySelectorAll(".pixel")
-    pixels.forEach((pixel) => {
-        pixel.addEventListener("mouseover", e => {
-            e.target.style.backgroundColor = drawColor(currentMode)
-            console.log(e.target.style.cssText)
+    const pixels = drawingArea.querySelectorAll(".pixel")
+    pixels.forEach(pixel => {
+        pixel.addEventListener("mouseover", (e) => {
+            drawColor(currentMode, e)
         })
+        
     })
 
 }
+
+const drawColor = (currentMode, e) => {
+    console.log(e.target.style.backgroundColor)
+    e.target.style.backgroundColor = 'blue';
+
+}
+
+// const drawColor = (currentMode, e) => {
+//     if (currentMode === "normal"){
+//         console.log(e.target.style.cssText)
+//     return `background-color: ${currentColor}`
+//     } else if (currentMode === "eraser"){
+//         return `background-color: rgb(255, 255, 255, .9)`
+//     } else if (currentMode === "rainbow") {
+//         let red = Math.floor(Math.random()*256)
+//         let green = Math.floor(Math.random()*256)
+//         let blue = Math.floor(Math.random()*256)
+//         let opacity = .5
+//         return `background-color: rgb(${red}, ${green}, ${blue}, ${opacity})`
+//     } else if (currentMode === "highlight"){
+//         console.log(e.target.dataset.color)
+//     }
+// }
+
+
+
+
+
+
+
 
 // Grid Size Slider // 
 gridSize.addEventListener("change", (e) => {
