@@ -131,8 +131,7 @@ switch (currentMode) {
         red = Math.floor(Math.random()*256)
         green = Math.floor(Math.random()*256)
         blue = Math.floor(Math.random()*256)
-        let opacity = .5
-        let rainbowPixel = `rgb(${red}, ${green}, ${blue}, ${opacity})`
+        let rainbowPixel = `rgb(${red}, ${green}, ${blue})`
         return e.target.style.backgroundColor = rainbowPixel
     break
 

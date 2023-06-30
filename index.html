@@ -5,33 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script src="main.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+ 
     <title>Pixel Sketch</title>
 </head>
 <body>
-    <h1>Pixel Art</h1>
-    <main>
-        <div class="toolbox">
-            <input type="color" name="pen-color" id="pen-color">
-
-            <button class="btn-tool" id="btn-eraser"></button>
-            <button class="btn-tool" id="btn-normal"></button>
-            <button class="btn-tool" id="btn-highlight"></button>
-            <button class="btn-tool" id="btn-shadow"></button>
-            <button class="btn-tool" id="btn-rainbow"></button>
-            <button class="btn-tool" id="btn-clear"></button>
-            <div class="slider-tool">
-                <div class="slider-info">
-                    <img src="./icons/iconmonstr-layout-grid-lined.svg" alt="" id="grid-icon">
-                    <span class="num-of-rows"></span>
-                </div>
-                <input type="range" min="4" max="10" value="4" name="slider" id="slider" class="slider">
+    <div id="app">
+        <h1>Pixel Dreams</h1>
+        <main>
+            <div class="toolbox">
+                <input type="color" name="pen-color" id="pen-color">
+                <button class="btn-tool" id="btn-normal"></button>
+                <button class="btn-tool" id="btn-highlight"></button>
+                <button class="btn-tool" id="btn-shadow"></button>
+                <button class="btn-tool" id="btn-rainbow"></button>
+                <button class="btn-tool" id="btn-eraser"></button>
+                <button class="btn-tool" id="btn-clear"></button>
                 
             </div>
-        </div>
 
-        <div class="drawing-area">
+            <div id="drawing-wrapper">
+                <div class="drawing-area">
+                </div>
 
-        </div>
-    </main>
+                <div class="slider-info">
+                    <img src="./icons/iconmonstr-layout-grid-lined.png" alt="" id="grid-icon">
+                    <span class="num-of-rows"></span>
+                    <input type="range" min="4" max="10" value="7" name="slider" id="slider" class="slider">
+                </div>
+                
+            </div>
+            
+        </main>
+        
+    </div>
 </body>
 </html>

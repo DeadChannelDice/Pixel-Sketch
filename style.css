@@ -29,45 +29,52 @@
   /* Reset end */
 
 body {
-    background-color: lightgray;
+    background-image: url(./icons/theartist-a-purpl3-smurf.webp);
+    background-position: center;
+    background-repeat: no-repeat;
     min-height: 100vh;
 }
 
   h1 {
     text-align: center;
+    font-size: 5rem;
+    
+  }
+
+  #app {
+    font-family: VT323;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
   }
 
   main {
     display: flex;
-    align-items: center;
-    justify-content: space-around;
-    border: 1px solid red;
-    max-width: 90%;
+    align-items: top;
     margin: 0 auto;
   }
 
   .toolbox {
     display: flex;
     flex-direction: column;
+    align-items: last baseline;
     width: 3rem;
-    border: 1px solid red;
   }
 
   .drawing-area {
     display: grid;
     grid-template-columns: auto auto auto auto;
     width: 400px;
-    height: 400px;
-    margin: 1rem;
-    /* border: 10px solid rgb(93, 236, 10, 1); */
-    
+    height: 400px;    
   }
 
   .pixel {
-    /* background-color: white; */
     height: auto;
     width: auto;
-    /* border: 1px solid red; */
   }
 
   #pen-color {
@@ -136,25 +143,42 @@ body {
   }
 
 #grid-icon {
-    height: 2.5rem;
-    width: 2.5rem;
-}
-
-.slider-tool {
-    display: flex;
-    align-items: center;
-    border: 2px solid black;
+    height: 3rem;
+    width: 3rem;
 }
 
 .slider-info {
     display: flex;
-    flex-direction: column;
-
+    justify-content: space-around;
+    align-items: center;
 }
 
+.num-of-rows {
+    font-size: 3rem;
+}
 
 #slider {
     appearance: none;
-    -webkit-appearance: slider-vertical;
-    border: 1px solid red;
+    -webkit-appearance: none;
+}
+
+#slider:focus {
+    appearance: none;
+    outline: none;
+}
+
+#slider::-webkit-slider-runnable-track {
+    background-color: white;
+    height: 1rem;
+    border-radius: 50%;
+}
+
+#slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 3rem;
+    width: 3rem;
+    background-color: rgb(0, 0, 0);
+    margin-top: -17px;
+    border: .5rem solid white;
+    border-radius: .25rem;
 }
