@@ -182,3 +182,11 @@ body {
     border: .5rem solid white;
     border-radius: .25rem;
 }
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
